@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vermilion", "..\..\projects
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glfw", "..\..\projects\lib\glfw\src\glfw.vcxproj", "{B7E9EB2C-F618-3CAD-929F-F36B4C0CE0BE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_使用vermilion基类绘制三角形", "02_使用vermilion基类绘制三角形\02_使用vermilion基类绘制三角形.vcxproj", "{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,22 @@ Global
 		{B7E9EB2C-F618-3CAD-929F-F36B4C0CE0BE}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
 		{B7E9EB2C-F618-3CAD-929F-F36B4C0CE0BE}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
 		{B7E9EB2C-F618-3CAD-929F-F36B4C0CE0BE}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.Debug|x64.ActiveCfg = Debug|x64
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.Debug|x64.Build.0 = Debug|x64
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.Debug|x86.ActiveCfg = Debug|Win32
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.Debug|x86.Build.0 = Debug|Win32
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.MinSizeRel|x64.Build.0 = Release|x64
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.MinSizeRel|x86.ActiveCfg = Release|Win32
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.MinSizeRel|x86.Build.0 = Release|Win32
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.Release|x64.ActiveCfg = Release|x64
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.Release|x64.Build.0 = Release|x64
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.Release|x86.ActiveCfg = Release|Win32
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.Release|x86.Build.0 = Release|Win32
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{7A6C21D8-FA49-4541-9D9B-F0395CDC357C}.RelWithDebInfo|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
