@@ -37,7 +37,7 @@ void TriangleByVermilion::Initialize(const char* title)
 	GLfloat vertices[numVertices][2] =
 	{
 		{0.9f, -0.75f}, {0.9f, 0.9f}, {-0.75f, 0.9f},//triangle1
-		{-0.9f, 0.75f}, {-0.9f, -0.9f}, {0.75f, 0.9f}//triangle2
+		{-0.9f, 0.75f}, {-0.9f, -0.9f}, {0.75f, -0.9f}//triangle2
 	};
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	//7 …Ë÷√ Ù–‘÷µglVertexAttribPointer()

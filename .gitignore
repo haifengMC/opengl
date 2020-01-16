@@ -5,7 +5,3 @@
 .vs/
 x64/
 Debug/
-*.vcxproj
-*.vcxproj.user
-*.filters
-*.sln
