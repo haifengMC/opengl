@@ -1,8 +1,0 @@
-﻿main.obj : error LNK2019: 无法解析的外部符号 _glfwWindowShouldClose，该符号在函数 "public: void __thiscall VermilionApplication::MainLoop(void)" (?MainLoop@VermilionApplication@@QAEXXZ) 中被引用
-main.obj : error LNK2019: 无法解析的外部符号 _glfwPollEvents，该符号在函数 "public: void __thiscall VermilionApplication::MainLoop(void)" (?MainLoop@VermilionApplication@@QAEXXZ) 中被引用
-main.obj : error LNK2019: 无法解析的外部符号 _glfwSwapBuffers，该符号在函数 "public: virtual void __thiscall VermilionApplication::Display(bool)" (?Display@VermilionApplication@@UAEX_N@Z) 中被引用
-main.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __thiscall VermilionApplication::Initialize(char const *)" (?Initialize@VermilionApplication@@UAEXPBD@Z)
-main.obj : error LNK2001: 无法解析的外部符号 _gl3wViewport
-E:\opengl\OGLPG-9th-Edition\lib\vermilion_d.lib : warning LNK4272: 库计算机类型“x64”与目标计算机类型“x86”冲突
-E:\opengl\OGLPG-9th-Edition\lib\glfw3_d.lib : warning LNK4272: 库计算机类型“x64”与目标计算机类型“x86”冲突
-E:\opengl\repos\01_OpenGL概述\Debug\01_glfw输出调试信息.exe : fatal error LNK1120: 5 个无法解析的外部命令
