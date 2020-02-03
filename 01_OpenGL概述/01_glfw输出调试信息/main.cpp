@@ -2,6 +2,7 @@
 
 #include "vgl.h"
 #include "vapp.h"
+#include "tools.h"
 
 BEGIN_APP_DECLARATION(OutputDebugInfo)
 	virtual void OnKey(int key, int scancode, int action, int mods);
@@ -36,13 +37,11 @@ void OutputDebugInfo::OnDrop(int num, const char** file)
 {
 	for (size_t i = 0; i < num; ++i)
 	{
+		std::string tempStr;
+		toANSI(file[i], tempStr);
 		std::ostringstream oss;
-		FILE* pFile;
-		fopen_s(&pFile, file[i], "r");
-		if (pFile) fclose(pFile);
-		else OutputDebugString("null\n");
 		
-		oss << i << " : " << file[i] << std::endl;
+		oss << i + 1 << " : " << tempStr << std::endl;
 		OutputDebugString(oss.str().c_str());
 	}
 }
