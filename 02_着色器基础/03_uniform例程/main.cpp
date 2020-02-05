@@ -1,10 +1,9 @@
 #include <stdlib.h>
-#include <string>
 
 #include "vgl.h"
 #include "vapp.h"
 #include "LoadShaders.h"
-#include "tools.h"
+#include "vtools.h"
 
 const char vShader[] =
 {
