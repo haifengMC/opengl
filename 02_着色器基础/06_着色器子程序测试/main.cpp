@@ -4,7 +4,7 @@
 #include "vgl.h"
 #include "LoadShaders.h"
 
-BEGIN_APP_DECLARATION(ShaderSubroutine)
+BEGIN_APP_DECLARATION(ShaderSubroutineTest)
 	virtual void Initialize(const char* title /* = 0 */);
 	virtual void Display(bool auto_redraw /* = true */);
 	virtual void Finalize();
@@ -17,10 +17,10 @@ BEGIN_APP_DECLARATION(ShaderSubroutine)
 	GLuint* idxindices = NULL;
 END_APP_DECLARATION()
 
-DEFINE_APP(ShaderSubroutine, "shader subroutine")
+DEFINE_APP(ShaderSubroutineTest, "shader subroutine test")
 
 
-void ShaderSubroutine::Initialize(const char* title /* = 0 */)
+void ShaderSubroutineTest::Initialize(const char* title /* = 0 */)
 {
 	base::Initialize(title);
 
@@ -36,8 +36,8 @@ void ShaderSubroutine::Initialize(const char* title /* = 0 */)
 
 	ShaderInfo shaders[] =
 	{
-		{ GL_VERTEX_SHADER, "subroutine.vert" },
-		{ GL_FRAGMENT_SHADER,"subroutine.frag" },
+		{ GL_VERTEX_SHADER, "subroutineTest.vert" },
+		{ GL_FRAGMENT_SHADER,"subroutineTest.frag" },
 		{ GL_NONE, NULL }
 	};
 	GLuint program = LoadShaders(shaders);
@@ -84,7 +84,7 @@ void ShaderSubroutine::Initialize(const char* title /* = 0 */)
 	glUniformSubroutinesuiv(GL_VERTEX_SHADER, numFuncLocs, indices);
 }
 
-void ShaderSubroutine::Display(bool auto_redraw /* = true */)
+void ShaderSubroutineTest::Display(bool auto_redraw /* = true */)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBindVertexArray(vao);
@@ -93,7 +93,7 @@ void ShaderSubroutine::Display(bool auto_redraw /* = true */)
 	base::Display(auto_redraw);
 }
 
-void ShaderSubroutine::Finalize()
+void ShaderSubroutineTest::Finalize()
 {
 	for (GLsizei i = 0; i < numFuncLocs; ++i)
 	{
@@ -105,7 +105,7 @@ void ShaderSubroutine::Finalize()
 	delete[] idxindices;
 }
 
-void ShaderSubroutine::OnKey(int key, int scancode, int action, int mods)
+void ShaderSubroutineTest::OnKey(int key, int scancode, int action, int mods)
 {
 	if (GLFW_PRESS == action)
 	{
