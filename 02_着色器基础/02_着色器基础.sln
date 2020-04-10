@@ -19,6 +19,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06_着色器子程序测试
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07_着色器子程序例程", "07_着色器子程序例程\07_着色器子程序例程.vcxproj", "{C27C7577-457D-4297-9AE9-8DB4ED026ADC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "09_SPIR-V", "09_SPIR-V\09_SPIR-V.vcxproj", "{344C9C52-448F-4E1D-9D79-EF5C57FC330E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -155,6 +157,22 @@ Global
 		{C27C7577-457D-4297-9AE9-8DB4ED026ADC}.RelWithDebInfo|x64.Build.0 = Release|x64
 		{C27C7577-457D-4297-9AE9-8DB4ED026ADC}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
 		{C27C7577-457D-4297-9AE9-8DB4ED026ADC}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.Debug|x64.ActiveCfg = Debug|x64
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.Debug|x64.Build.0 = Debug|x64
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.Debug|x86.ActiveCfg = Debug|Win32
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.Debug|x86.Build.0 = Debug|Win32
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.MinSizeRel|x64.Build.0 = Release|x64
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.MinSizeRel|x86.ActiveCfg = Release|Win32
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.MinSizeRel|x86.Build.0 = Release|Win32
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.Release|x64.ActiveCfg = Release|x64
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.Release|x64.Build.0 = Release|x64
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.Release|x86.ActiveCfg = Release|Win32
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.Release|x86.Build.0 = Release|Win32
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{344C9C52-448F-4E1D-9D79-EF5C57FC330E}.RelWithDebInfo|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
