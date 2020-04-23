@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vermilion", "..\..\routines
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03_不使用vermilion基类绘制三角形", "03_不使用vermilion基类绘制三角形\03_不使用vermilion基类绘制三角形.vcxproj", "{EE1D94DA-9C20-47A2-821D-BDB955C85593}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glfw", "..\..\routines\bin\lib\glfw\src\glfw.vcxproj", "{3C783EAE-A068-3CF9-857A-C4138379F6FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -83,6 +85,18 @@ Global
 		{EE1D94DA-9C20-47A2-821D-BDB955C85593}.RelWithDebInfo|x64.Build.0 = Release|x64
 		{EE1D94DA-9C20-47A2-821D-BDB955C85593}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
 		{EE1D94DA-9C20-47A2-821D-BDB955C85593}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.Debug|x64.ActiveCfg = Debug|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.Debug|x64.Build.0 = Debug|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.Debug|x86.ActiveCfg = Debug|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.MinSizeRel|x86.ActiveCfg = MinSizeRel|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.Release|x64.ActiveCfg = Release|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.Release|x64.Build.0 = Release|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.Release|x86.ActiveCfg = Release|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
+		{3C783EAE-A068-3CF9-857A-C4138379F6FE}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
