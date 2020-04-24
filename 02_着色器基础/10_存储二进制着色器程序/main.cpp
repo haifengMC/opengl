@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 {
 	if (2 != argc)
 	{
-		cout << "./svBinProg [filename]" << endl;
+		cout << "./svBinProg.exe [filename]" << endl;
 		return -1;
 	}
 	const GLchar* name = argv[1];
@@ -35,18 +35,23 @@ int main(int argc, char* argv[])
 	memset(shaders, 0, sizeof(shaders));
 	GLuint count = 0;
 	const GLuint nameLen = 128;
+	std::string errMsg;
 	for (GLuint i = 0; i < countof(suffixes); ++i)
 	{
 		GLchar* nameBuf = new GLchar[nameLen];
 		sprintf_s(nameBuf, nameLen, "%s%s", name, suffixes[i].suffix);
 		ShaderInfo tmpSh = { suffixes[i].type, nameBuf, 0 };
-		if (!LoadShader(&tmpSh))
+		if (!LoadShader(&tmpSh, &errMsg, GLLS_ERRMSG_SHADER))
 		{
 			delete[] nameBuf;
 			continue;
 		}
 
 		memcpy(shaders + count++, &tmpSh, sizeof(ShaderInfo));
+	}
+	if (!errMsg.empty())
+	{
+		cout << errMsg;
 	}
 
 	if (!count)
