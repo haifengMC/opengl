@@ -1,4 +1,4 @@
-#include <sstream>
+#include "global.h"
 
 #include "vapp.h"
 #include "vgl.h"

@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "global.h"
 
 #include "vgl.h"
 #include "vapp.h"

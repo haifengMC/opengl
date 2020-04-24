@@ -1,9 +1,8 @@
+#include "global.h"
+
 #include "vgl.h"
 #include "vapp.h"
 #include "LoadShaders.h"
-
-#include <iostream>
-#include <sstream>
 
 BEGIN_APP_DECLARATION(SeparateShaderObjects)
 	void Initialize(const char* title /* = 0 */);

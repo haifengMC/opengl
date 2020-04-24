@@ -1,9 +1,9 @@
-#include <string>
-
+#include "global.h"
 #include "vgl.h"
+
+#include "tools.h"
 #include "vapp.h"
 #include "LoadShaders.h"
-#include "tools.h"
 
 BEGIN_APP_DECLARATION(OutputShaderLog)
 	virtual void Initialize(const char* title /* = 0 */);

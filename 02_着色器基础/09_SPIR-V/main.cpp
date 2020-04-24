@@ -1,3 +1,5 @@
+#include "global.h"
+
 #include "vgl.h"
 #include "vapp.h"
 #include "LoadShaders.h"

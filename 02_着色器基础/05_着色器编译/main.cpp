@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sstream>
+#include "global.h"
 
 #include "vgl.h"
 #include "vapp.h"
