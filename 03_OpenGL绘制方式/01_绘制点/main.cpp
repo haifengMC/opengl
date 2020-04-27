@@ -1,7 +1,8 @@
+#include "global.h"
+
 #include "vgl.h"
 #include "vapp.h"
 #include "LoadShaders.h"
-#include <sstream>
 
 BEGIN_APP_DECLARATION(DrawPointTest)
 	virtual void Initialize(const char* title /* = 0 */);
