@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "09_SPIR-V", "09_SPIR-V\09_S
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10_存储二进制着色器程序", "10_存储二进制着色器程序\10_存储二进制着色器程序.vcxproj", "{359BB14E-CD4E-4171-BF20-C1DC25FA51EC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11_加载二进制着色器文件", "11_加载二进制着色器文件\11_加载二进制着色器文件.vcxproj", "{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -209,6 +211,22 @@ Global
 		{359BB14E-CD4E-4171-BF20-C1DC25FA51EC}.RelWithDebInfo|x64.Build.0 = Release|x64
 		{359BB14E-CD4E-4171-BF20-C1DC25FA51EC}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
 		{359BB14E-CD4E-4171-BF20-C1DC25FA51EC}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.Debug|x64.ActiveCfg = Debug|x64
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.Debug|x64.Build.0 = Debug|x64
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.Debug|x86.ActiveCfg = Debug|Win32
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.Debug|x86.Build.0 = Debug|Win32
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.MinSizeRel|x64.Build.0 = Release|x64
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.MinSizeRel|x86.ActiveCfg = Release|Win32
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.MinSizeRel|x86.Build.0 = Release|Win32
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.Release|x64.ActiveCfg = Release|x64
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.Release|x64.Build.0 = Release|x64
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.Release|x86.ActiveCfg = Release|Win32
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.Release|x86.Build.0 = Release|Win32
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{D1319BBF-4E87-49EB-BA21-D6DDE4E1D54A}.RelWithDebInfo|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
