@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03_绘制线段", "03_绘�
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04_绘制三角形", "04_绘制三角形\04_绘制三角形.vcxproj", "{7583EEF3-881A-4543-84A2-29C5A388465D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05_无名缓存基本操作", "05_无名缓存基本操作\05_无名缓存基本操作.vcxproj", "{BF28A7A0-7529-42E6-8BF0-20127C69697A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -101,6 +103,22 @@ Global
 		{7583EEF3-881A-4543-84A2-29C5A388465D}.RelWithDebInfo|x64.Build.0 = Release|x64
 		{7583EEF3-881A-4543-84A2-29C5A388465D}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
 		{7583EEF3-881A-4543-84A2-29C5A388465D}.RelWithDebInfo|x86.Build.0 = Release|Win32
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.Debug|x64.ActiveCfg = Debug|x64
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.Debug|x64.Build.0 = Debug|x64
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.Debug|x86.ActiveCfg = Debug|Win32
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.Debug|x86.Build.0 = Debug|Win32
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.MinSizeRel|x64.ActiveCfg = Release|x64
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.MinSizeRel|x64.Build.0 = Release|x64
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.MinSizeRel|x86.ActiveCfg = Release|Win32
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.MinSizeRel|x86.Build.0 = Release|Win32
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.Release|x64.ActiveCfg = Release|x64
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.Release|x64.Build.0 = Release|x64
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.Release|x86.ActiveCfg = Release|Win32
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.Release|x86.Build.0 = Release|Win32
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.RelWithDebInfo|x64.ActiveCfg = Release|x64
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.RelWithDebInfo|x64.Build.0 = Release|x64
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.RelWithDebInfo|x86.ActiveCfg = Release|Win32
+		{BF28A7A0-7529-42E6-8BF0-20127C69697A}.RelWithDebInfo|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
