@@ -10,8 +10,6 @@
 
 BEG_CFGDATA(StaticVertexAttribCfg)
 {
-	DECL_CFGDATA(StaticVertexAttribCfg);
-
 	std::string shaderName;
 	GLuint vertLoc;
 	GLuint colorLoc;
@@ -64,17 +62,17 @@ void StaticVertexAttrib::Initialize(const char* title /* = 0 */)
 	bufCntMgr.addData("colors", sizeof(GLfloat), 3 * 3);
 	glBufferData(GL_ARRAY_BUFFER, bufCntMgr.getSize(), NULL, GL_DYNAMIC_DRAW);
 	void* data = glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-	memcpy((GLchar*)data + bufCntMgr.getOffset("vertice"), cfg.vertice, bufCntMgr.getSize("vertice"));
-	memcpy((GLchar*)data + bufCntMgr.getOffset("colors"), cfg.colors, bufCntMgr.getSize("colors"));
+	memcpy((GLchar*)data + bufCntMgr.getOffset("vertice"), cfg.data.vertice, bufCntMgr.getSize("vertice"));
+	memcpy((GLchar*)data + bufCntMgr.getOffset("colors"), cfg.data.colors, bufCntMgr.getSize("colors"));
 
 	glUnmapBuffer(GL_ARRAY_BUFFER);
 	glUseProgram(prog);
 
-	glVertexAttribPointer(cfg.vertLoc, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)bufCntMgr.getOffset("vertice"));
-	glVertexAttribPointer(cfg.colorLoc, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)bufCntMgr.getOffset("colors"));
-	glEnableVertexAttribArray(cfg.vertLoc);
+	glVertexAttribPointer(cfg.data.vertLoc, 2, GL_FLOAT, GL_FALSE, 0, (GLvoid*)bufCntMgr.getOffset("vertice"));
+	glVertexAttribPointer(cfg.data.colorLoc, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)bufCntMgr.getOffset("colors"));
+	glEnableVertexAttribArray(cfg.data.vertLoc);
 	//glEnableVertexAttribArray(cfg.colorLoc);
-	glVertexAttrib3fv(cfg.colorLoc, cfg.staticColor);
+	glVertexAttrib3fv(cfg.data.colorLoc, cfg.data.staticColor);
 }
 
 void StaticVertexAttrib::Display(bool auto_redraw /* = true */)
@@ -98,10 +96,10 @@ void StaticVertexAttrib::OnMouse(int button, int action, int mods)
 		switch (action)
 		{
 		case  GLFW_PRESS:
-			glEnableVertexAttribArray(cfg.colorLoc);
+			glEnableVertexAttribArray(cfg.data.colorLoc);
 			break;
 		case GLFW_RELEASE:
-			glDisableVertexAttribArray(cfg.colorLoc);
+			glDisableVertexAttribArray(cfg.data.colorLoc);
 			break;
 		default:
 			break;
