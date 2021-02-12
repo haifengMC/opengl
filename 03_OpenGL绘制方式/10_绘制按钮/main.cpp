@@ -1,7 +1,10 @@
 #include "global.h"
-
 #include "vgl.h"
 #include "vapp.h"
+
+#include "hTool.h"
+#include "hObject.h"
+#include "hRect.h"
 #include "vtype.h"
 #include "vcommon.h"
 #include "vbuffer.h"
@@ -27,12 +30,27 @@ DEFINE_APP(ButtonTest, "button test");
 
 void APP_FUNCTION(ButtonTest, Initialize)(const char* title)
 {
+	auto ptr = getThis();
+	new hButton(ptr);
 	OutputDebugStringA("Initialize\n");
+	std::ostringstream os;
+	Debug(os, (hObject&)*this) << "\n";
+	OutputDebugStringA(os.str().c_str());
+	os.str("");
+	hPObj::debugMap(os);
+	OutputDebugStringA(os.str().c_str());
 }
 
 void APP_FUNCTION(ButtonTest, Finalize)()
 {
+	hObject::Finalize();
 	OutputDebugStringA("Finalize\n");
+	std::ostringstream os;
+	Debug(os, (hObject&)*this) << "\n";
+	OutputDebugStringA(os.str().c_str());
+	os.str("");
+	hPObj::debugMap(os);
+	OutputDebugStringA(os.str().c_str());
 }
 
 void APP_FUNCTION(ButtonTest, OnMouse)(int button, int action, int mods)

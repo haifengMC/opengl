@@ -142,10 +142,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="hButton.cpp" />
+    <ClCompile Include="hObject.cpp" />
+    <ClCompile Include="hRect.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hButton.h" />
+    <ClInclude Include="hObject.h" />
+    <ClInclude Include="hRect.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
