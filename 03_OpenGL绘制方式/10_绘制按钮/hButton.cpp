@@ -5,7 +5,7 @@
 #include "hRect.h"
 #include "hButton.h"
 
-hButton::hButton(hPWObj parent, const hRect& r) : hObject(parent)
+hButton::hButton(hObject* parent, const hRect& r) : hObject(parent)
 {
 	_rect = r;
 }

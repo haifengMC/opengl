@@ -2,6 +2,14 @@
 #include "hTool.h"
 #include "hObject.h"
 
+hObject::hObject(hObject* parent)
+{
+	if (parent)
+	{
+		_parent = getThis();
+	}
+}
+
 hObject::hObject(hPWObj parent)
 {
 	if (parent)

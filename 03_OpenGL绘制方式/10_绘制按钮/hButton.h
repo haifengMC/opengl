@@ -1,10 +1,10 @@
 #pragma once
 
 
-class hButton : public hObject, public hTool::hAutoPtrObj<hButton>
+class hButton : public hObject
 {
 	hRect _rect;
 public:
-	hButton(hPWObj parent) : hObject(parent) {}
-	hButton(hPWObj parent, const hRect& r);
+	hButton(hObject* parent) : hObject(parent) {}
+	hButton(hObject* parent, const hRect& r);
 };

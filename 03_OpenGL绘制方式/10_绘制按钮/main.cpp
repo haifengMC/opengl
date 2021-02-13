@@ -30,8 +30,7 @@ DEFINE_APP(ButtonTest, "button test");
 
 void APP_FUNCTION(ButtonTest, Initialize)(const char* title)
 {
-	auto ptr = getThis();
-	new hButton(ptr);
+	new hButton(getThis());
 	OutputDebugStringA("Initialize\n");
 	std::ostringstream os;
 	Debug(os, (hObject&)*this) << "\n";

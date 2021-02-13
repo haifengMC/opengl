@@ -6,7 +6,7 @@ typedef std::list<hPObj> hPObjList;
 typedef hPObjList::iterator hPObjListIt;
 typedef hTool::hWeakPtr<hObject> hPWObj;
 
-class hObject : public hTool::hAutoPtrObj<hObject>
+class hObject : public hTool::hAutoPtrObj
 {
 	DefLog_Init();
 
@@ -14,6 +14,7 @@ class hObject : public hTool::hAutoPtrObj<hObject>
 	hPObjListIt _thisIt;//对象在父类中的迭代器
 	hPObjList _children;
 public:
+	hObject(hObject* parent = NULL);
 	hObject(hPWObj parent = NULL);
 	virtual ~hObject() {}
 
