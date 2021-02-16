@@ -1,6 +1,9 @@
 #include "global.h"
 
 #include "vgl.h"
+#include "hTool.h"
+#include "hObject.h"
+
 #include "vapp.h"
 
 #include "LoadShaders.h"
@@ -8,13 +11,17 @@
 #define INVALID_COORD -2.0f
 typedef std::pair<GLfloat, GLfloat> Point;
 
-BEGIN_APP_DECLARATION(NamedBufferOperation)
-virtual void Initialize(const char* title /* = 0 */);
-virtual void Display(bool auto_redraw /* = true */);
-virtual void Finalize();
+BEGIN_UI_DECLARATION(NamedBufferOperation) {}
+END_UI_DECLARATION();
 
-virtual void OnMouse(int button, int action, int mods);
-virtual void OnCursorNorm(float x, float y);
+BEGIN_APP_DECLARATION(NamedBufferOperation)
+{
+	void initialize(const char* title /* = 0 */);
+	void display(bool auto_redraw /* = true */);
+	void finalize();
+
+	void onMouse(int button, int action, int mods);
+	void onCursorNorm(float x, float y);
 private:
 	GLuint vao = 0, vbo[2];
 	GLint pointId = -1;
@@ -33,16 +40,16 @@ private:
 	GLboolean isPress = GL_FALSE;
 	GLfloat oldX = INVALID_COORD, oldY = INVALID_COORD;
 
-	void refreshPointId(const Point& cursor);
-	GLboolean surroundPoint(const Point& p1, const Point& p2, const GLfloat& diff = 0.05f);
-END_APP_DECLARATION()
+	void refreshPointId(const Point & cursor);
+	GLboolean surroundPoint(const Point & p1, const Point & p2, const GLfloat & diff = 0.05f);
+}
+END_APP_DECLARATION();
 
+DECLARATION_APP(NamedBufferOperation);
 DEFINE_APP(NamedBufferOperation, "named buffer operation")
 
-void NamedBufferOperation::Initialize(const char* title /* = 0 */)
+void APP_FUNCTION(NamedBufferOperation, initialize)(const char* title)
 {
-	base::Initialize(title);
-
 	ErrMsg errMsg = { GLLS_ERRMSG_ALL };
 	GLuint prog = LoadProgramByBinary("NamedBufferOperation.bin", &errMsg);
 	if (errMsg.err())
@@ -70,24 +77,22 @@ void NamedBufferOperation::Initialize(const char* title /* = 0 */)
 	glPointSize(10.0f);
 }
 
-void NamedBufferOperation::Display(bool auto_redraw /* = true */)
+void APP_FUNCTION(NamedBufferOperation, display)(bool auto_redraw /* = true */)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBindVertexArray(vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	if (-1 != pointId)
 		glDrawArrays(GL_POINTS, pointId, 1);
-
-	base::Display(auto_redraw);
 }
 
-void NamedBufferOperation::Finalize()
+void APP_FUNCTION(NamedBufferOperation, finalize)()
 {
 
 }
 
 
-void NamedBufferOperation::OnMouse(int button, int action, int mods)
+void APP_FUNCTION(NamedBufferOperation, onMouse)(int button, int action, int mods)
 {
 	switch (button)
 	{
@@ -138,7 +143,7 @@ void NamedBufferOperation::OnMouse(int button, int action, int mods)
 	}
 }
 
-void NamedBufferOperation::OnCursorNorm(float x, float y)
+void APP_FUNCTION(NamedBufferOperation, onCursorNorm)(float x, float y)
 {
 	if (!isPress)
 	{
@@ -169,7 +174,7 @@ void NamedBufferOperation::OnCursorNorm(float x, float y)
 	glClearNamedBufferSubData(vbo[0], GL_RG32F, sizeof(p) * pointId, sizeof(p), GL_RG, GL_FLOAT, p);
 }
 
-void NamedBufferOperation::refreshPointId(const Point& cursor)
+void APP_FUNCTION(NamedBufferOperation, refreshPointId)(const Point& cursor)
 {
 	if (-1 != pointId && !surroundPoint({ triangle[pointId][0], triangle[pointId][1] }, cursor))
 	{
@@ -187,7 +192,7 @@ void NamedBufferOperation::refreshPointId(const Point& cursor)
 	pointId = -1;
 }
 
-GLboolean NamedBufferOperation::surroundPoint(const Point& p1, const Point& p2, const GLfloat& diff)
+GLboolean APP_FUNCTION(NamedBufferOperation, surroundPoint)(const Point& p1, const Point& p2, const GLfloat& diff)
 {
 	GLfloat
 		distX = p1.first - p2.first,
