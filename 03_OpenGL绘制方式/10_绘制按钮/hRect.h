@@ -1,6 +1,7 @@
 #pragma once
 #include "vgl.h"
 //µã
+class hSize;
 class hPoint
 {
 	GLint _x = 0, _y = 0;
@@ -10,6 +11,8 @@ public:
 
 	GLint x() const { return _x; }
 	GLint y() const { return _y; }
+
+	void norm(GLfloat* buf, const hSize& size);
 };
 constexpr hPoint operator "" _P(const char* col, size_t n);
 

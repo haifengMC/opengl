@@ -141,12 +141,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ButtonTestApp.cpp" />
+    <ClCompile Include="ButtonTestUi.cpp" />
     <ClCompile Include="hButton.cpp" />
     <ClCompile Include="hObject.cpp" />
     <ClCompile Include="hRect.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ButtonTest.h" />
     <ClInclude Include="hButton.h" />
     <ClInclude Include="hObject.h" />
     <ClInclude Include="hRect.h" />

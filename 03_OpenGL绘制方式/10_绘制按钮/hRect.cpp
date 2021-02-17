@@ -91,3 +91,9 @@ constexpr hRect operator""_Rect(const char* col, size_t n)
 	if (h) hV = atoi(h + 1);
 	return hRect(xV, yV, wV, hV);
 }
+
+void hPoint::norm(GLfloat* buf, const hSize& size)
+{
+	buf[0] = (GLfloat)(_x * 2 - size.width()) / size.width();
+	buf[1] = (GLfloat)(size.height() - _y * 2) / size.height();
+}
