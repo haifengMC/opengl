@@ -33,6 +33,12 @@
     <ClCompile Include="ButtonTestUi.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="hAppBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="hTime.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hButton.h">
@@ -45,6 +51,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="ButtonTest.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hAppBase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hTime.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
