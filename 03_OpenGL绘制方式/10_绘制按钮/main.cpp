@@ -11,14 +11,12 @@
 //
 //#include "LoadShaders.h"
 //#include "ButtonTest.h"
-#include "hTime.h"
+#include "hAppBase.h"
 
 //DEFINE_APP(ButtonTest, "button test");
 
-int main()
+int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
-	std::cout << getNow() << std::endl;
-	std::this_thread::sleep_for(std::chrono::seconds(1));
-	std::cout << getNow() << std::endl;
+	hAppBase app;
 	return 0;
 }

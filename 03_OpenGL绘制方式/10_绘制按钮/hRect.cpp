@@ -6,7 +6,7 @@ constexpr hPoint operator""_P(const char* col, size_t n)
 {
 	const char* end = col + n;
 	const char* x = NULL, * y = NULL;
-	GLint xV = 0, yV = 0;
+	int xV = 0, yV = 0;
 	for (const char* p = col; p != end; ++p)
 	{
 		switch (*p)
@@ -62,7 +62,7 @@ bool hRect::contains(const hRect& r)
 		_top <= r.top() && _bottom >= r.bottom();
 }
 
-bool hRect::contains(GLint x, GLint y)
+bool hRect::contains(int x, int y)
 {
 	return _left <= x && _right >= x &&
 		_top <= y && _bottom >= y;
@@ -72,7 +72,7 @@ constexpr hRect operator""_Rect(const char* col, size_t n)
 {
 	const char* end = col + n;
 	const char* x = NULL, *y = NULL, *w = NULL, *h = NULL;
-	GLint xV = 0, yV = 0, wV = 0, hV = 0;
+	int xV = 0, yV = 0, wV = 0, hV = 0;
 	for (const char* p = col; p != end; ++p)
 	{
 		switch (*p)
@@ -92,8 +92,8 @@ constexpr hRect operator""_Rect(const char* col, size_t n)
 	return hRect(xV, yV, wV, hV);
 }
 
-void hPoint::norm(GLfloat* buf, const hSize& size)
+void hPoint::norm(float* buf, const hSize& size)
 {
-	buf[0] = (GLfloat)(_x * 2 - size.width()) / size.width();
-	buf[1] = (GLfloat)(size.height() - _y * 2) / size.height();
+	buf[0] = (float)(_x * 2 - size.width()) / size.width();
+	buf[1] = (float)(size.height() - _y * 2) / size.height();
 }
