@@ -41,8 +41,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -142,13 +142,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="hAppBase.cpp" />
+    <ClCompile Include="hAppBaseData.cpp" />
     <ClCompile Include="hRect.cpp" />
     <ClCompile Include="hTime.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hAppBase.h" />
+    <ClInclude Include="hAppBaseData.h" />
     <ClInclude Include="hRect.h" />
+    <ClInclude Include="hTextOpt.h" />
     <ClInclude Include="hTime.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

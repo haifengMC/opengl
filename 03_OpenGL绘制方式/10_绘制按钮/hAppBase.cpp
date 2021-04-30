@@ -1,41 +1,72 @@
-#include "vgl.h"
-
 #include "global.h"
 #include "hTime.h"
 #include "hRect.h"
+#include "hAppBaseData.h"
 #include "hAppBase.h"
 
 uint64_t hAppBase::appTime()
 {
-	return (getNow() - _startTime).count();
+	return (getNow() - _pData->getBegTime()).count();
 }
 
-bool hAppBase::initCallback()
+void hAppBase::loop()
 {
-	if (!glfwInit())
+	if (init())
+		run();
+	
+	final();
+}
+
+bool hAppBase::init()
+{
+	_pData.emplace(getNow());
+	if (!_pData)
 	{
-		OutputDebugStringA("glfwInit()失败...");
+		OutputDebugStringA("基础数据初始化失败...");
 		return false;
 	}
 
-	_startTime = getNow();
 	if (!preInit())
 	{
 		OutputDebugStringA("预初始化失败...");
 		return false;
 	}
 
-	if (!_winRect.width() || !_winRect.height())
-		_winRect = "x0 y0 w800 h600"_Rect;
-	if (_appName.empty())
-		_appName = "Application";
+	if (!glfwInit())
+	{
+		OutputDebugStringA("glfwInit()失败...");
+		return false;
+	}
+	
+	if (!_pData->createWin())
+	{
+		OutputDebugStringA("创建窗口失败...");
+		return false;
+	}
 
-	_pWin = glfwCreateWindow(
-		_winRect.width(), _winRect.height(), 
-		_appName.c_str(), nullptr, nullptr);
+	glfwSetWindowUserPointer(_pData->getWin(), this);
 
-	glfwSetWindowUserPointer(_pWin, this);
+	if (!onInit())
+	{
+		OutputDebugStringA("初始化失败...");
+		return false;
+	}
 
 	return true;
+}
+
+void hAppBase::run()
+{
+	do
+	{
+		onDisplay();
+		glfwSwapBuffers(_pData->getWin());
+		glfwPollEvents();
+	} while (!glfwWindowShouldClose(_pData->getWin()));
+}
+
+void hAppBase::final()
+{
+	onFinal();
 }
 

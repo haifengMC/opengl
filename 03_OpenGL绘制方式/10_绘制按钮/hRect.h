@@ -54,4 +54,4 @@ public:
 	bool contains(const hRect& r);
 	bool contains(int x, int y);
 };
-constexpr hRect operator "" _Rect(const char* col, size_t n);
+constexpr hRect operator ""_Rect(const char* col, size_t n);

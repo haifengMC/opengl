@@ -1,7 +1,7 @@
 #include "global.h"
 #include "hTime.h"
 
-const hTimePoint& getNow()
+hTimePoint getNow()
 {
 	return std::chrono::steady_clock::now();
 }

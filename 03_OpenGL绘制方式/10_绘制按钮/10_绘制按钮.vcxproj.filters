@@ -27,6 +27,9 @@
     <ClCompile Include="hRect.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="hAppBaseData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hAppBase.h">
@@ -36,6 +39,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="hRect.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hAppBaseData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hTextOpt.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

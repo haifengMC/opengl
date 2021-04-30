@@ -1,6 +1,11 @@
-#include "vgl.h"
 #include "global.h"
 #include "hRect.h"
+
+void hPoint::norm(float* buf, const hSize& size)
+{
+	buf[0] = (float)(_x * 2 - size.width()) / size.width();
+	buf[1] = (float)(size.height() - _y * 2) / size.height();
+}
 
 constexpr hPoint operator""_P(const char* col, size_t n)
 {
@@ -90,10 +95,4 @@ constexpr hRect operator""_Rect(const char* col, size_t n)
 	if (w) wV = atoi(w + 1);
 	if (h) hV = atoi(h + 1);
 	return hRect(xV, yV, wV, hV);
-}
-
-void hPoint::norm(float* buf, const hSize& size)
-{
-	buf[0] = (float)(_x * 2 - size.width()) / size.width();
-	buf[1] = (float)(size.height() - _y * 2) / size.height();
 }
