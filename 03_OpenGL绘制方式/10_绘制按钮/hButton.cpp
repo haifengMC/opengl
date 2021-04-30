@@ -65,7 +65,7 @@ void hButton::initialize(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLui
 	os.str("");
 	os << std::setprecision(2);
 	for (GLuint i = 0; i < 4; ++i)
-		os << showEle[i];
+		os << showEle[i] << " ";
 	OutputDebugStringA(os.str().c_str());
 }
 
