@@ -5,11 +5,13 @@
 #include "hObject.h"
 #include "hButton.h"
 
-hButton::hButton(hObject* parent, const hRect& r) : hObject(parent)
+hButton::hButton(PWhObj parent, const hRect& r) : hObject(parent)
 {
 	_rect = r;
 }
 
+
+#if 0
 GLuint hButton::getBufSize()
 {
 	return hObject::getBufSize() + 24 * sizeof(GLfloat);
@@ -35,7 +37,7 @@ void hButton::initialize(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLui
 		getPointByIndex(i).norm(vertBuf, winSize);
 		glNamedBufferSubData(vbo, bOffset, sizeof(vertBuf), vertBuf);
 		bOffset += sizeof(vertBuf);
-		GLfloat colorBuf[3] = { 1.0f, 0.0f, 0.0f};
+		GLfloat colorBuf[3] = { 1.0f, 0.0f, 0.0f };
 		glNamedBufferSubData(vbo, bOffset, sizeof(colorBuf), colorBuf);
 		bOffset += sizeof(colorBuf);
 	}
@@ -88,3 +90,4 @@ hPoint hButton::getPointByIndex(GLuint i)
 	}
 	return hPoint();
 }
+#endif

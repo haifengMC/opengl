@@ -1,4 +1,6 @@
 #pragma once
+#include "hTextOpt.h"
+
 //点
 class hSize;
 class hPoint
@@ -48,10 +50,11 @@ public:
 	int height() const { return _bottom - _top; }
 	hPoint location() const { return hPoint(_left, _top); }
 	hSize size() const { return hSize(_right - _left, _bottom - _top); }
+	void resize(int width, int height);
 
 	//判断是否在此矩形框内
 	bool contains(const hPoint& p);
 	bool contains(const hRect& r);
 	bool contains(int x, int y);
 };
-constexpr hRect operator ""_Rect(const char* col, size_t n);
+TEXTOPT(hRect, _Rect, x, y, w, h);

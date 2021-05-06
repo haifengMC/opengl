@@ -3,9 +3,10 @@
 #include "vmacro.h"
 
 #define TEXTOPT_DELC_F(n, nm) const char* nm = NULL
-#define TEXTOPT_DELC_V_F(n, nm) int COMB(nm, V) = NULL
-#define TEXTOPT_CASE_F(n, nm)  case 'nm': nm=p;break
-#define TEXTOPT_CASE_F(n, nm)  case 'nm': nm=p;break
+#define TEXTOPT_DELC_V_F(n, nm) int nm##V  = NULL
+#define TEXTOPT_CASE_F(n, nm)  case #@nm: nm=p;break
+#define TEXTOPT_ASSIGN_F(n, nm)  if (nm) nm##V = atoi(nm + 1)
+#define TEXTOPT_RETURN_F(n, nm)  nm##V
 
 //ÎÄ±¾²Ù×÷·û
 #define TEXTOPT(cls, opt, ...) \
@@ -13,12 +14,15 @@
 	{\
 	const char* end = col + n;\
 	REPEAT_SEP(TEXTOPT_DELC_F, SEM_M, ##__VA_ARGS__);\
-	REPEAT_SEP(TEXTOPT_DELC_V_F, SEM_M, ##__VA_ARGS__);
+	REPEAT_SEP(TEXTOPT_DELC_V_F, SEM_M, ##__VA_ARGS__);\
 	for (const char* p = col; p != end; ++p)\
 	{\
-		switch (*p){REPEAT_SEP(TEXTOPT_DELC_V_F, SEM_M, ##__VA_ARGS__);)\
-	}
+		switch (*p) { REPEAT_SEP(TEXTOPT_CASE_F, SEM_M, ##__VA_ARGS__); }\
+	}\
+	REPEAT_SEP(TEXTOPT_ASSIGN_F, SEM_M, ##__VA_ARGS__);\
+	return cls(REPEAT(TEXTOPT_RETURN_F, ##__VA_ARGS__));}
 	
+
 
 /*
 	{

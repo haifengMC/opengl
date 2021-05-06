@@ -10,16 +10,14 @@
 //
 //#include "LoadShaders.h"
 //#include "ButtonTest.h"
-#include "hTextOpt.h"
-#include "hAppBase.h"
+#include "ButtonTest.h"
 
 //DEFINE_APP(ButtonTest, "button test");
 
 int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
-	//hAppBase app;
-	//app.loop();
-	OutputDebugStringA(TO_STRING(TEXTOPT(hRect, _Rect,x,y,w,h)));
+	ButtonTest app;
+	app.loop();
 
 	return 0;
 }

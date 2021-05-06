@@ -1,17 +1,57 @@
 #include "global.h"
 
-#include "hTool.h"
 #include "hRect.h"
 #include "hObject.h"
 #include "hButton.h"
 
-#include "vgl.h"
-#include "vapp.h"
 #include "hConfig.h"
 
 #include "LoadShaders.h"
 #include "ButtonTest.h"
+#include "ButtonTestUi.h"
 
+bool ButtonTest::preInit()
+{
+	setUi(new ButtonTestUi);
+
+	setName("ButtonTest");
+	addShader(GL_VERTEX_SHADER, "ButtonTest.vert");
+	addShader(GL_FRAGMENT_SHADER, "ButtonTest.frag");
+
+	return true;
+}
+
+bool ButtonTest::onInit()
+{
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	GLfloat vertices[6][2] =
+	{
+		{0.9f, -0.75f}, {0.9f, 0.9f}, {-0.75f, 0.9f},//triangle1
+		{-0.9f, 0.75f}, {-0.9f, -0.9f}, {0.75f, -0.9f}//triangle2
+	};
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	//7 设置属性值glVertexAttribPointer()
+	glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, BUFFER_OFFSET(0));
+	//8 激活属性值glEnableVertexAttriArray()
+	glEnableVertexAttribArray(0);
+
+	return true;
+}
+
+bool ButtonTest::onDisplay()
+{
+	//2 将顶点数组对象绑定到OpenGL环境glBindVertexArray()
+	glBindVertexArray(vao);
+	//3 使用非索引形式绘制
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+
+	return true;
+}
+
+#if 0
 APP_FUNCTION(ButtonTest, ~ButtonTestApp)()
 {
 	OutputDebugStringA("~ButtonTestApp\n");
@@ -31,7 +71,7 @@ void APP_FUNCTION(ButtonTest, initialize)(GLuint uiBufSize, GLuint uiEleBufSize)
 
 	glGenVertexArrays(1, &ButtonTest::vaUi);
 	glBindVertexArray(ButtonTest::vaUi);
-	
+
 	glGenBuffers(1, &ButtonTest::vbUi);
 	glBindBuffer(GL_ARRAY_BUFFER, ButtonTest::vbUi);
 
@@ -92,3 +132,4 @@ void APP_FUNCTION(ButtonTest, onCursorNorm)(float x, float y)
 	os << "(" << x << "," << y << ")\n";
 	OutputDebugStringA(os.str().c_str());
 }
+#endif

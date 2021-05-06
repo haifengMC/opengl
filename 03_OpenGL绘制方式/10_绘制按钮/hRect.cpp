@@ -52,8 +52,14 @@ hRect::hRect(const hPoint& p, const hSize& s)
 	_left = p.x();
 	_top = p.y();
 	_right = _left + s.width();
-	_bottom = _left + s.height();
+	_bottom = _top + s.height();
 }
+
+void hRect::resize(int width, int height)
+{
+	_right = _left + width;
+	_bottom = _left + height;
+}	
 
 bool hRect::contains(const hPoint& p)
 {
@@ -71,28 +77,4 @@ bool hRect::contains(int x, int y)
 {
 	return _left <= x && _right >= x &&
 		_top <= y && _bottom >= y;
-}
-
-constexpr hRect operator""_Rect(const char* col, size_t n)
-{
-	const char* end = col + n;
-	const char* x = NULL, *y = NULL, *w = NULL, *h = NULL;
-	int xV = 0, yV = 0, wV = 0, hV = 0;
-	for (const char* p = col; p != end; ++p)
-	{
-		switch (*p)
-		{
-		case 'x': x = p; break;
-		case 'y': y = p; break;
-		case 'w': w = p; break;
-		case 'h': h = p; break;
-		default: break;
-		}
-	}
-
-	if (x) xV = atoi(x + 1);
-	if (y) yV = atoi(y + 1);
-	if (w) wV = atoi(w + 1);
-	if (h) hV = atoi(h + 1);
-	return hRect(xV, yV, wV, hV);
 }

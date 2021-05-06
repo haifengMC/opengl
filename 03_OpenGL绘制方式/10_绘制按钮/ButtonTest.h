@@ -1,5 +1,18 @@
-#pragma once;
+#pragma once
+#include "hAppBase.h"
 
+class ButtonTest : public hAppBase
+{
+	GLuint vao;
+	GLuint vbo;
+public:
+	bool preInit();
+	bool onInit();
+	bool onDisplay();
+	bool onFinal() { return true; }
+};
+
+#if 0
 BEGIN_UI_DECLARATION(ButtonTest)
 {
 	~ButtonTestUi();
@@ -21,3 +34,5 @@ BEGIN_APP_DECLARATION(ButtonTest)
 END_APP_DECLARATION();
 
 DECLARATION_APP(ButtonTest);
+
+#endif

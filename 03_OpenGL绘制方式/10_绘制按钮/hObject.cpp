@@ -1,10 +1,8 @@
 #include "global.h"
-#include "vgl.h"
-#include "hTool.h"
 #include "hRect.h"
 #include "hObject.h"
 
-hObject::hObject(hObject* parent)
+hObject::hObject(PWhObj parent)
 {
 	if (!parent)
 		return;
@@ -12,7 +10,7 @@ hObject::hObject(hObject* parent)
 	_parent = parent;
 	_thisIt = parent->insertChild(this);
 }
-
+#if 0
 GLuint hObject::getBufSize()
 {
 	GLuint size = 0;
@@ -59,15 +57,33 @@ void hObject::finalize()
 		delete pChild;
 	}
 }
+#endif
 
-hObjListIt hObject::insertChild(hObject* obj)
+bool hObject::loadUiCallback()
+{
+	if (!_parent && !loadUi())
+		return false;
+
+	for (auto& pChild : _children)
+	{
+		if (!pChild->loadUi())
+			return false;
+
+		if (!pChild->loadUiCallback())
+			return false;
+	}
+
+	return true;
+}
+
+hObjListIt hObject::insertChild(PhObj obj)
 {
 	if (!obj)
 		return hObjListIt();
 
 	return _children.insert(_children.end(), obj);
 }
-
+#if 0
 void hObject::removeChild(hObjListIt objIt)
 {
 	if (!objIt._Ptr)
@@ -75,3 +91,5 @@ void hObject::removeChild(hObjListIt objIt)
 
 	_children.erase(objIt);
 }
+#endif
+
