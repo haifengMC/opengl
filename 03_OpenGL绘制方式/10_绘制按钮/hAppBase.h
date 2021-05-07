@@ -38,12 +38,12 @@ public:
 	void loop();
 
 private:
-	bool init();
-	void run();
-	void final();
-	void resize(int width, int height);
+	bool loadUiCallback();
+	bool initCallback();
+	void runCallback();
+	void finalCallback();
+	void resizeCallback(int width, int height);
 
-	bool loadUi();
 	void errCallBack();
 	static void winSizeCallback(GLFWwindow* win, int width, int height);
 };

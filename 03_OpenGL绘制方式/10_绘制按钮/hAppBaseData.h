@@ -21,6 +21,7 @@ public:
 
 	const hTimePoint& getBegTime() const { return _begTime; }
 	const hRect& getRect() const { return _winRect; }
+	hSize getSize() const { return _winRect.size(); }
 	const std::string& getName() const { return _appName; }
 
 	bool initOpenGL();

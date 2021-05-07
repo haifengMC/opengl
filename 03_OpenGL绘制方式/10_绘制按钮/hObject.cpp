@@ -4,30 +4,11 @@
 
 hObject::hObject(PWhObj parent)
 {
-	if (!parent)
-		return;
-
-	_parent = parent;
-	_thisIt = parent->insertChild(this);
+	if (parent)
+		parent->addChild(this);
 }
+
 #if 0
-GLuint hObject::getBufSize()
-{
-	GLuint size = 0;
-	for (auto childIt = _children.begin(); childIt != _children.end(); ++childIt)
-		size += (*childIt)->getBufSize();
-
-	return size;
-}
-
-GLuint hObject::getEleBufSize()
-{
-	GLuint size = 0;
-	for (auto childIt = _children.begin(); childIt != _children.end(); ++childIt)
-		size += (*childIt)->getEleBufSize();
-
-	return size;
-}
 
 void hObject::initialize(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset)
 {
@@ -61,13 +42,14 @@ void hObject::finalize()
 
 bool hObject::loadUiCallback()
 {
-	if (!_parent && !loadUi())
+	if (!loadUi())
 		return false;
 
-	for (auto& pChild : _children)
+	for (auto it = _children.begin(); it != _children.end(); ++it)
 	{
-		if (!pChild->loadUi())
-			return false;
+		auto& pChild = *it;
+		pChild->_parent = this;
+		pChild->_thisIt = it;
 
 		if (!pChild->loadUiCallback())
 			return false;
@@ -76,12 +58,58 @@ bool hObject::loadUiCallback()
 	return true;
 }
 
-hObjListIt hObject::insertChild(PhObj obj)
+bool hObject::initUiCallback(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset)
 {
-	if (!obj)
-		return hObjListIt();
+	if (!onInit(winSize, vbo, bOffset, veo, eOffset))
+		return false;
 
-	return _children.insert(_children.end(), obj);
+	for (auto& pChild : _children)
+	{
+		if (!pChild->initUiCallback(winSize, vbo, bOffset, veo, eOffset))
+			return false;
+	}
+
+	return true;
+}
+
+bool hObject::displayCallback(GLuint vao)
+{
+	if (!onDisplay(vao))
+		return false;
+
+	for (auto& pChild : _children)
+	{
+		if (!pChild->displayCallback(vao))
+			return false;
+	}
+
+	return true;
+}
+
+GLuint hObject::calcBufSizeCallback()
+{
+	GLuint size = getBufSize();
+
+	for (auto& pChild : _children)
+		size += pChild->calcBufSizeCallback();
+
+	return size;
+}
+
+GLuint hObject::calcEleBufSizeCallback()
+{
+	GLuint size = getEleBufSize();
+
+	for (auto& pChild : _children)
+		size += pChild->calcEleBufSizeCallback();
+
+	return size;
+}
+
+void hObject::addChild(PhObj obj)
+{
+	if (obj)
+		_children.push_back(obj);
 }
 #if 0
 void hObject::removeChild(hObjListIt objIt)

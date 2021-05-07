@@ -3,29 +3,35 @@
 class hObject;
 typedef hTool::hWeakPtr<hObject> PWhObj;
 typedef hTool::hAutoPtr<hObject> PhObj;
-typedef std::list<PWhObj> hObjList;
+typedef std::list<PhObj> hObjList;
 typedef hObjList::iterator hObjListIt;
 
-class hObject : public hTool::hAutoPtrObj
+class hObject
 {
 	DefLog_Init();
 	PWhObj _parent;
-	hObjListIt _thisIt;//对象在父类中的迭代器
 	hObjList _children;
+	hObjListIt _thisIt;//对象在父类中的迭代器
 public:
 	hObject(PWhObj parent = PWhObj());
 	virtual ~hObject() {}
 
-	bool loadUi() { return true; }
-	//virtual GLuint getBufSize();
-	//virtual GLuint getEleBufSize();
-	//virtual void initialize(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset);
-	//virtual void display();
+	virtual bool loadUi() { return true; }
+	virtual bool onInit(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset) { return true; }
+	virtual bool onDisplay(GLuint vao) { return true; }
+
+	virtual GLuint getBufSize() { return 0; }
+	virtual GLuint getEleBufSize() { return 0; }
 	//virtual void finalize();
 
 	bool loadUiCallback();
+	bool initUiCallback(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset);
+	bool displayCallback(GLuint vao);
+
+	GLuint calcBufSizeCallback();
+	GLuint calcEleBufSizeCallback();
 private:
-	hObjListIt insertChild(PhObj obj);
+	void addChild(PhObj obj);
 	//virtual void removeChild(hObjListIt objIt);
 };
-DefLog(hObject, _parent, _thisIt, _children);
+DefLog(hObject, _children);

@@ -39,27 +39,34 @@ uint64_t hAppBase::appTime()
 
 void hAppBase::loop()
 {
-	if (init())
-		run();
+	if (initCallback())
+		runCallback();
 	else
 		errCallBack();
 	
-	final();
+	finalCallback();
 }
 
-bool hAppBase::init()
+bool hAppBase::loadUiCallback()
+{
+	if (UI_DT->getUi())
+		return UI_DT->loadUiCallback();
+
+	UI_DT->setUi(new hObject);
+	return true;
+}
+
+bool hAppBase::initCallback()
 {
 	_pData[AppDataType_Base].bind(new hAppBaseData(getNow()));
-	auto pBaseDt = BASE_DT;
-	if (!pBaseDt)
+	if (!BASE_DT)
 	{
 		setErr("基础数据创建失败...");
 		return false;
 	}
 
 	_pData[AppDataType_Ui].bind(new hAppUiData);
-	auto pUiDt = UI_DT;
-	if (!pUiDt)
+	if (!UI_DT)
 	{
 		setErr("UI数据创建失败...");
 		return false;
@@ -71,7 +78,7 @@ bool hAppBase::init()
 		return false;
 	}
 
-	if (!loadUi())
+	if (!loadUiCallback())
 	{
 		setErr("UI加载失败...");
 		return false;
@@ -82,20 +89,26 @@ bool hAppBase::init()
 		setErr("glfw初始化失败...");
 		return false;
 	}
-	
-	if (!pBaseDt->createWin())
+
+	if (!BASE_DT->createWin())
 	{
 		setErr("创建窗口失败...");
 		return false;
 	}
 
-	glfwSetWindowUserPointer(pBaseDt->getWin(), this);
-	glfwSetWindowSizeCallback(pBaseDt->getWin(), winSizeCallback);
+	glfwSetWindowUserPointer(BASE_DT->getWin(), this);
+	glfwSetWindowSizeCallback(BASE_DT->getWin(), winSizeCallback);
 
-	glfwMakeContextCurrent(pBaseDt->getWin());
+	glfwMakeContextCurrent(BASE_DT->getWin());
 	gl3wInit();
-	if (!pBaseDt->initOpenGL())
+	if (!BASE_DT->initOpenGL())
 		return false;
+
+	if (!UI_DT->initUiCallback(BASE_DT->getSize()))
+	{
+		setErr("UI加载失败...");
+		return false;
+	}
 
 	if (!onInit())
 	{
@@ -106,18 +119,19 @@ bool hAppBase::init()
 	return true;
 }
 
-void hAppBase::run()
+void hAppBase::runCallback()
 {
 	do
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
+		UI_DT->displayCallback();
 		onDisplay();
 		glfwSwapBuffers(BASE_DT->getWin());
 		glfwPollEvents();
 	} while (!glfwWindowShouldClose(BASE_DT->getWin()));
 }
 
-void hAppBase::final()
+void hAppBase::finalCallback()
 {
 	if (!BASE_DT)
 		return;
@@ -125,20 +139,11 @@ void hAppBase::final()
 	onFinal();
 }
 
-void hAppBase::resize(int width, int height)
+void hAppBase::resizeCallback(int width, int height)
 {
 	BASE_DT->resize(width, height);
 	glViewport(0, 0, width, height);
 	onResize();
-}
-
-bool hAppBase::loadUi()
-{
-	if (UI_DT->getUi())
-		return UI_DT->loadUiCallback();
-
-	UI_DT->setUi(new hObject);
-	return true;
 }
 
 void hAppBase::errCallBack()
@@ -150,6 +155,6 @@ void hAppBase::winSizeCallback(GLFWwindow* win, int width, int height)
 {
 	hAppBase* pThis = (hAppBase*)glfwGetWindowUserPointer(win);
 
-	pThis->resize(width, height);
+	pThis->resizeCallback(width, height);
 }
 

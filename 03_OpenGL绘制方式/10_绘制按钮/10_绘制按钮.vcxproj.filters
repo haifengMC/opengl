@@ -30,19 +30,19 @@
     <ClCompile Include="hAppBaseData.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ButtonTestApp.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="hAppUiData.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="hObject.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ButtonTestUi.cpp">
+    <ClCompile Include="hButton.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="hButton.cpp">
+    <ClCompile Include="hColor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonTest.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,19 +62,19 @@
     <ClInclude Include="hTextOpt.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ButtonTest.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="hAppUiData.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="hObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ButtonTestUi.h">
+    <ClInclude Include="hButton.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="hButton.h">
+    <ClInclude Include="hColor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonTest.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
