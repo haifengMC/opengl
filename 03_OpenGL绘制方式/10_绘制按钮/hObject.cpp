@@ -1,123 +1,79 @@
 #include "global.h"
+#include "vcommon.h"
 #include "hRect.h"
 #include "hObject.h"
 
-hObject::hObject(PWhObj parent)
+hObject::hObject(hObject* parent)
 {
 	if (parent)
 		parent->addChild(this);
 }
 
-#if 0
-
-void hObject::initialize(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset)
+hObject::~hObject()
 {
-	for (auto childIt = _children.begin(); childIt != _children.end(); ++childIt)
-		(*childIt)->initialize(winSize, vbo, bOffset, veo, eOffset);
+	finalCallback();
 }
 
-void hObject::display()
+void hObject::addChild(hObject* pChild)
 {
-	for (auto childIt = _children.begin(); childIt != _children.end(); ++childIt)
-		(*childIt)->display();
+	if (pChild)
+		_children.push_back(pChild);
 }
 
-void hObject::finalize()
+void hObject::delChild(hObjListIt childIt)
 {
+	if (!_thisIt._Ptr)
+		return;
+
+	_children.erase(_thisIt);
+}
+
+bool hObject::preInitCallback(void* pDt)
+{
+	if (!onPreInit(pDt))
+		return false;
+
+	for (auto& pChild : _children)
+	{
+		if (!pChild->preInitCallback(pDt))
+			return false;
+	}
+
+	return true;
+}
+
+bool hObject::initCallback(void* pDt)
+{
+	if (!onInit(pDt))
+		return false;
+
+	for (auto& pChild : _children)
+	{
+		if (!pChild->initCallback(pDt))
+			return false;
+	}
+
+	return true;
+}
+
+bool hObject::finalCallback()
+{
+	onFinal();
+
 	if (_parent)
 	{
-		_parent->removeChild(_thisIt);
+		_parent->delChild(_thisIt);
 		_parent = NULL;
 		_thisIt = hObjListIt();
 	}
 
-	for (auto childIt = _children.begin(); childIt != _children.end();)
+	for (auto pChild : _children)
 	{
-		auto pChild = *childIt++;
-		pChild->finalize();
-		delete pChild;
+		pChild->finalCallback();
+		DEL(pChild);
 	}
-}
-#endif
-
-bool hObject::loadUiCallback()
-{
-	if (!loadUi())
-		return false;
-
-	for (auto it = _children.begin(); it != _children.end(); ++it)
-	{
-		auto& pChild = *it;
-		pChild->_parent = this;
-		pChild->_thisIt = it;
-
-		if (!pChild->loadUiCallback())
-			return false;
-	}
+	_children.clear();
 
 	return true;
 }
-
-bool hObject::initUiCallback(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset)
-{
-	if (!onInit(winSize, vbo, bOffset, veo, eOffset))
-		return false;
-
-	for (auto& pChild : _children)
-	{
-		if (!pChild->initUiCallback(winSize, vbo, bOffset, veo, eOffset))
-			return false;
-	}
-
-	return true;
-}
-
-bool hObject::displayCallback(GLuint vao)
-{
-	if (!onDisplay(vao))
-		return false;
-
-	for (auto& pChild : _children)
-	{
-		if (!pChild->displayCallback(vao))
-			return false;
-	}
-
-	return true;
-}
-
-GLuint hObject::calcBufSizeCallback()
-{
-	GLuint size = getBufSize();
-
-	for (auto& pChild : _children)
-		size += pChild->calcBufSizeCallback();
-
-	return size;
-}
-
-GLuint hObject::calcEleBufSizeCallback()
-{
-	GLuint size = getEleBufSize();
-
-	for (auto& pChild : _children)
-		size += pChild->calcEleBufSizeCallback();
-
-	return size;
-}
-
-void hObject::addChild(PhObj obj)
-{
-	if (obj)
-		_children.push_back(obj);
-}
-#if 0
-void hObject::removeChild(hObjListIt objIt)
-{
-	if (!objIt._Ptr)
-		return;
-
-	_children.erase(objIt);
-}
-#endif
 

@@ -1,6 +1,7 @@
 #pragma once
 
-class hAppBaseData : public hAppBaseDataAdaptor
+typedef std::chrono::time_point<std::chrono::steady_clock> hTimePoint;
+class hAppBaseData
 {
 	GLFWwindow* _pWin = NULL;
 	const hTimePoint _begTime;

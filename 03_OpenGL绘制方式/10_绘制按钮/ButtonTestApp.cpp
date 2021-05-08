@@ -8,19 +8,8 @@
 #include "hConfig.h"
 
 #include "LoadShaders.h"
-#include "ButtonTest.h"
-
-bool ButtonTestUi::loadUi()
-{
-	new hButton(this, "x20 y20 w100 h50"_Rect);
-	new hButton(this, "x20 y90 w100 h50"_Rect);
-
-	std::ostringstream os;
-	Debug(os, (hObject&)*this) << "\n";
-	OutputDebugStringA(os.str().c_str());
-
-	return true;
-}
+#include "ButtonTestApp.h"
+#include "ButtonTestUi.h"
 
 bool ButtonTestApp::preInit()
 {

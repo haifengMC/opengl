@@ -1,21 +1,22 @@
 #pragma once
 
-struct hAppUiInitData
+class hAppBaseData;
+class hAppUiData
 {
-	//const hSize winSize;
-};
+	friend class hAppBase;
 
-class hAppUiData : public hAppBaseDataAdaptor
-{
-	GLuint vao = 0;
-	GLuint vbo = 0;
-	GLuint veo = 0;
-	PhObj _pObj;
+	GLuint _vao = 0;
+	GLuint _vbo = 0;
+	GLuint _veo = 0;
+	hAppBaseData* _pApp = NULL;
+	hUi* _pUi = NULL;
 public:
-	PhObj getUi() { return _pObj; }
-	void setUi(hObject* ui);
+	hUi* getUi() { return _pUi; }
+	hUi* setUi(hUi* pUi);
 
-	bool loadUiCallback() { return _pObj->loadUiCallback(); }
-	bool initUiCallback(const hSize& winSize);
+	~hAppUiData();
+private:
+	bool preInitCallback(hAppBaseData* pApp);
+	bool initCallback();
 	bool displayCallback();
 };

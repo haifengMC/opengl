@@ -42,7 +42,13 @@
     <ClCompile Include="hColor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ButtonTest.cpp">
+    <ClCompile Include="hUi.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonTestUi.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonTestApp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -74,7 +80,16 @@
     <ClInclude Include="hColor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ButtonTest.h">
+    <ClInclude Include="hUi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonTestUi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonTestApp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hUiParam.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

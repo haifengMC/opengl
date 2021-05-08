@@ -1,6 +1,5 @@
 #pragma once
 
-#include "hObject.h"
 #include "hSingleton.h"
 
 enum AppDataType
@@ -10,15 +9,10 @@ enum AppDataType
 	AppDataType_Max,
 };
 
-struct hAppBaseDataAdaptor
-{
-	virtual ~hAppBaseDataAdaptor() {}
-};
-
 class hAppBase : public Singleton<hAppBase>
 {
 protected:
-	hTool::hAutoPtr<hAppBaseDataAdaptor> _pData[AppDataType_Max];
+	void* _pData[AppDataType_Max];
 
 	//预初始化 加载配置、设置基本窗口属性
 	virtual bool preInit() { return true; }
@@ -29,7 +23,7 @@ protected:
 	virtual bool onResize() { return true; }
 
 	void setName(const char* name);
-	void setUi(hObject* ui);
+	void setUi(void* pUi);
 	void addShader(uint32_t type, const char* shade);
 
 	void setErr(const char* err);
@@ -38,7 +32,6 @@ public:
 	void loop();
 
 private:
-	bool loadUiCallback();
 	bool initCallback();
 	void runCallback();
 	void finalCallback();

@@ -3,36 +3,63 @@
 #include "hRect.h"
 #include "hObject.h"
 #include "hAppBase.h"
+#include "hUiParam.h"
+#include "hUi.h"
+#include "hAppBaseData.h"
 #include "hAppUiData.h"
 
-void hAppUiData::setUi(hObject* ui)
+hUi* hAppUiData::setUi(hUi* ui)
 {
-	_pObj.bind(ui);
+	hUi* pOld = _pUi;
+	_pUi = ui;
+	return pOld;
 }
 
-bool hAppUiData::initUiCallback(const hSize& winSize)
+hAppUiData::~hAppUiData()
 {
-	glGenVertexArrays(1, &vao);
-	if (!vao)
+	DEL(_pUi);
+}
+
+bool hAppUiData::preInitCallback(hAppBaseData* pApp)
+{
+	if (!pApp)
 		return false;
 
-	glGenBuffers(1, &vbo);
-	if (!vbo)
+	if (!_pUi)
+		_pUi = new hUi;
+
+	if (!_pUi)
 		return false;
 
-	glGenBuffers(1, &veo);
-	if (!veo)
+	_pApp = pApp;
+	if (!_pUi->preInitCallback(NULL))
 		return false;
 
-	glBindVertexArray(vao);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, _pObj->calcBufSizeCallback(), NULL, GL_DYNAMIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, veo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _pObj->calcEleBufSizeCallback(), NULL, GL_DYNAMIC_DRAW);
+	return true;
+}
 
-	GLuint bOffset = 0;
-	GLuint eOffset = 0;
-	if (!_pObj->initUiCallback(winSize, vbo, bOffset, veo, eOffset))
+bool hAppUiData::initCallback()
+{
+	glGenVertexArrays(1, &_vao);
+	if (!_vao)
+		return false;
+
+	glGenBuffers(1, &_vbo);
+	if (!_vbo)
+		return false;
+
+	glGenBuffers(1, &_veo);
+	if (!_veo)
+		return false;
+
+	glBindVertexArray(_vao);
+	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+	glBufferData(GL_ARRAY_BUFFER, _pUi->calcBufSizeCallback(), NULL, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _veo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _pUi->calcEleBufSizeCallback(), NULL, GL_DYNAMIC_DRAW);
+
+	UiParamInit param = { _vbo, 0, _veo, 0, _pApp->getSize() };
+	if (!_pUi->initCallback(&param))
 		return false;
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, BUFFER_OFFSET(0));
@@ -44,7 +71,7 @@ bool hAppUiData::initUiCallback(const hSize& winSize)
 
 bool hAppUiData::displayCallback()
 {
-	return _pObj->displayCallback(vao);
+	return _pUi->showUiCallback(_vao);
 }
 
 

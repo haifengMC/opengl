@@ -10,7 +10,7 @@
 //
 //#include "LoadShaders.h"
 //#include "ButtonTest.h"
-#include "ButtonTest.h"
+#include "ButtonTestApp.h"
 
 //DEFINE_APP(ButtonTest, "button test");
 

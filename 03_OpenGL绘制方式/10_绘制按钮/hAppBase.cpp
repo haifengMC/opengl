@@ -3,23 +3,28 @@
 #include "hRect.h"
 #include "hObject.h"
 #include "hAppBase.h"
+#include "hUi.h"
 #include "hAppBaseData.h"
 #include "hAppUiData.h"
 
-#define BASE_DT _pData[AppDataType_Base].dynamic<hAppBaseData>()
-#define UI_DT _pData[AppDataType_Ui].dynamic<hAppUiData>()
+#define BASE_DT reinterpret_cast<hAppBaseData*>(_pData[AppDataType_Base])
+#define UI_DT reinterpret_cast<hAppUiData*>(_pData[AppDataType_Ui])
 
 void hAppBase::setName(const char* name)
 {
 	BASE_DT->setName(name);
 }
 
-void hAppBase::setUi(hObject* ui)
+void hAppBase::setUi(void* pUi)
 {
-	if (!ui)
+	if (!pUi)
 		return;
 
-	UI_DT->setUi(ui);
+	hUi* pNewUi = reinterpret_cast<hUi*>(pUi);
+	hUi* pOldUi = UI_DT->setUi(pNewUi);
+
+	if (pOldUi)
+		DEL(pOldUi);
 }
 
 void hAppBase::addShader(uint32_t type, const char* shade)
@@ -47,25 +52,16 @@ void hAppBase::loop()
 	finalCallback();
 }
 
-bool hAppBase::loadUiCallback()
-{
-	if (UI_DT->getUi())
-		return UI_DT->loadUiCallback();
-
-	UI_DT->setUi(new hObject);
-	return true;
-}
-
 bool hAppBase::initCallback()
 {
-	_pData[AppDataType_Base].bind(new hAppBaseData(getNow()));
+	_pData[AppDataType_Base] = new hAppBaseData(getNow());
 	if (!BASE_DT)
 	{
 		setErr("基础数据创建失败...");
 		return false;
 	}
 
-	_pData[AppDataType_Ui].bind(new hAppUiData);
+	_pData[AppDataType_Ui] = new hAppUiData;
 	if (!UI_DT)
 	{
 		setErr("UI数据创建失败...");
@@ -78,9 +74,9 @@ bool hAppBase::initCallback()
 		return false;
 	}
 
-	if (!loadUiCallback())
+	if (!UI_DT->preInitCallback(BASE_DT))
 	{
-		setErr("UI加载失败...");
+		setErr("UI预初始化失败...");
 		return false;
 	}
 
@@ -104,9 +100,9 @@ bool hAppBase::initCallback()
 	if (!BASE_DT->initOpenGL())
 		return false;
 
-	if (!UI_DT->initUiCallback(BASE_DT->getSize()))
+	if (!UI_DT->initCallback())
 	{
-		setErr("UI加载失败...");
+		setErr("UI初始化失败...");
 		return false;
 	}
 
@@ -133,10 +129,10 @@ void hAppBase::runCallback()
 
 void hAppBase::finalCallback()
 {
-	if (!BASE_DT)
-		return;
-
 	onFinal();
+
+	for (auto pDt : _pData)
+		DEL(pDt);
 }
 
 void hAppBase::resizeCallback(int width, int height)
@@ -158,3 +154,5 @@ void hAppBase::winSizeCallback(GLFWwindow* win, int width, int height)
 	pThis->resizeCallback(width, height);
 }
 
+#undef BASE_DT 
+#undef UI_DT 

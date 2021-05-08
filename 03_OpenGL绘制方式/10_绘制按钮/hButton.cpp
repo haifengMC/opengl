@@ -1,44 +1,70 @@
 #include "global.h"
-#include "vgl.h"
-#include "hTool.h"
+
 #include "hColor.h"
 #include "hRect.h"
-#include "hObject.h"
+#include "hUiParam.h"
 #include "hButton.h"
 
-hButton::hButton(PWhObj parent, const hRect& r) : hObject(parent)
+struct  hButtonData
 {
-	_rect = r;
+	GLuint _bOffset = 0;
+	GLuint _eOffset = 0;
+	hRect _rect;
+	hColor _col = _col = "r84 g184 b237 a100"_Col;
+};
+
+hButton::hButton(hUi* parent) : hUi(parent)
+{
+	_pData = new hButtonData;
 }
 
-bool hButton::onInit(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset)
+hButton::hButton(hUi* parent, const hRect& r) : hUi(parent)
 {
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, veo);
+	hButtonData* pData = new hButtonData;
+	pData->_rect = r;
+	_pData = pData;
+}
 
-	_bOffset = bOffset;
-	_eOffset = eOffset;
-	GLuint idBase = _bOffset / sizeof(GLfloat) / 3;
+hButton::~hButton()
+{
+	DEL(_pData);
+}
+
+#define _DT reinterpret_cast<hButtonData*>(_pData)
+#define _BOFF _DT->_bOffset
+#define _EOFF _DT->_eOffset
+#define _RECT _DT->_rect
+#define _COL _DT->_col
+
+
+bool hButton::onInitUi(UiParamInit& param)
+{
+	glBindBuffer(GL_ARRAY_BUFFER, param.vbo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, param.veo);
+
+	_BOFF = param.bOffset;
+	_EOFF = param.eOffset;
+	GLuint idBase = _BOFF / sizeof(GLfloat) / 3;
 	GLuint indices[4] = {};
 	for (GLuint i = 0; i < 4; ++i)
 	{
 		indices[i] = idBase + 2 * i;
 		GLfloat vertBuf[3] = {};
-		getPointByIndex(i).norm(vertBuf, winSize);
-		glBufferSubData(GL_ARRAY_BUFFER, bOffset, sizeof(vertBuf), vertBuf);
-		bOffset += sizeof(vertBuf);
+		getPointByIndex(i).norm(vertBuf, param.winSize);
+		glBufferSubData(GL_ARRAY_BUFFER, param.bOffset, sizeof(vertBuf), vertBuf);
+		param.bOffset += sizeof(vertBuf);
 		GLfloat colorBuf[3] = {};
-		_col.norm(colorBuf);
-		glBufferSubData(GL_ARRAY_BUFFER, bOffset, sizeof(colorBuf), colorBuf);
-		bOffset += sizeof(colorBuf);
+		_COL.norm(colorBuf);
+		glBufferSubData(GL_ARRAY_BUFFER, param.bOffset, sizeof(colorBuf), colorBuf);
+		param.bOffset += sizeof(colorBuf);
 	}
-	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, eOffset, sizeof(indices), indices);
-	eOffset += sizeof(indices);
+	glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, param.eOffset, sizeof(indices), indices);
+	param.eOffset += sizeof(indices);
 
 	//glPointSize(10.f);
 
 	GLfloat showBuf[24] = {};
-	glGetBufferSubData(GL_ARRAY_BUFFER, _bOffset, sizeof(showBuf), showBuf);
+	glGetBufferSubData(GL_ARRAY_BUFFER, _BOFF, sizeof(showBuf), showBuf);
 	std::stringstream os;
 	os << std::setprecision(2);
 	for (GLuint i = 0; i < 24; ++i)
@@ -54,7 +80,7 @@ bool hButton::onInit(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint v
 	OutputDebugStringA(os.str().c_str());
 
 	GLuint showEle[4] = {};
-	glGetBufferSubData(GL_ELEMENT_ARRAY_BUFFER, _eOffset, sizeof(showEle), showEle);
+	glGetBufferSubData(GL_ELEMENT_ARRAY_BUFFER, _EOFF, sizeof(showEle), showEle);
 	os.str("");
 	os << std::setprecision(2);
 	for (GLuint i = 0; i < 4; ++i)
@@ -64,10 +90,10 @@ bool hButton::onInit(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint v
 	return true;
 }
 
-bool hButton::onDisplay(GLuint vao)
+bool hButton::onShowUi(GLuint vao)
 {
 	glBindVertexArray(vao);
-	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, (GLvoid*)_eOffset);
+	glDrawElements(GL_TRIANGLE_STRIP, 4, GL_UNSIGNED_INT, (GLvoid*)_EOFF);
 	return true;
 }
 
@@ -85,10 +111,10 @@ hPoint hButton::getPointByIndex(GLuint i)
 {
 	switch (i)
 	{
-	case 0: return hPoint(_rect.right(), _rect.top());
-	case 1: return hPoint(_rect.right(), _rect.bottom());
-	case 2: return hPoint(_rect.left(), _rect.top());
-	case 3: return hPoint(_rect.left(), _rect.bottom());
+	case 0: return hPoint(_RECT.right(), _RECT.top());
+	case 1: return hPoint(_RECT.right(), _RECT.bottom());
+	case 2: return hPoint(_RECT.left(), _RECT.top());
+	case 3: return hPoint(_RECT.left(), _RECT.bottom());
 	default:
 		break;
 	}

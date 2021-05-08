@@ -1,37 +1,30 @@
 #pragma once
 
 class hObject;
-typedef hTool::hWeakPtr<hObject> PWhObj;
-typedef hTool::hAutoPtr<hObject> PhObj;
-typedef std::list<PhObj> hObjList;
+typedef std::list<hObject*> hObjList;
 typedef hObjList::iterator hObjListIt;
 
 class hObject
 {
 	DefLog_Init();
-	PWhObj _parent;
-	hObjList _children;
+	friend class hAppUiData;
+protected:
+	hObject* _parent;
 	hObjListIt _thisIt;//对象在父类中的迭代器
+	hObjList _children;
 public:
-	hObject(PWhObj parent = PWhObj());
-	virtual ~hObject() {}
+	hObject(hObject* parent = NULL);
+	virtual ~hObject();
 
-	virtual bool loadUi() { return true; }
-	virtual bool onInit(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset) { return true; }
-	virtual bool onDisplay(GLuint vao) { return true; }
-
-	virtual GLuint getBufSize() { return 0; }
-	virtual GLuint getEleBufSize() { return 0; }
-	//virtual void finalize();
-
-	bool loadUiCallback();
-	bool initUiCallback(const hSize& winSize, GLuint vbo, GLuint& bOffset, GLuint veo, GLuint& eOffset);
-	bool displayCallback(GLuint vao);
-
-	GLuint calcBufSizeCallback();
-	GLuint calcEleBufSizeCallback();
+	virtual bool onPreInit(void* pDt) { return true; }
+	virtual bool onInit(void* pDt) { return true; }
+	virtual bool onFinal() { return true; }
 private:
-	void addChild(PhObj obj);
-	//virtual void removeChild(hObjListIt objIt);
+	void addChild(hObject* pChild);
+	void delChild(hObjListIt childIt);
+
+	bool preInitCallback(void* pDt);
+	bool initCallback(void* pDt);
+	bool finalCallback();
 };
-DefLog(hObject, _children);
+DefLog(hObject, _parent, _thisIt, _children);
